@@ -107,8 +107,6 @@ const App = () => {
 
   const handleChange = ({ target, }) => {
     const { name, value } = target;
-    if (name === 'hour' && (Number(value) > 23 || Number(value) < 0)) return;
-    if (name === 'minute' && (Number(value) > 59 || Number(value) < 0)) return;
 
     setFormData((prevData) => ({
       ...prevData,
