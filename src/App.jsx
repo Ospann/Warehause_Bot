@@ -79,9 +79,6 @@ const App = () => {
         setsuppliers(data);
       } catch (error) {
         setMessage(error.message);
-        setTimeout(() => {
-          tg.close();
-        }, 3000);
       }
     };
 
