@@ -8,7 +8,7 @@ const Header = () => {
 
     return (
         <Box className={classes.header}>
-            <ArrowBackIcon w={8} h={8} onClick={() => tg.close()} />
+            <ArrowBackIcon w={8} h={8} onClick={() => tg.close()} style={{ cursor: "pointer" }} />
             <Heading size='lg'>Warehouse</Heading>
         </Box>
     )

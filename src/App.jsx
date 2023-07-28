@@ -26,12 +26,14 @@ const App = () => {
     }
     fetchData();
   }, [setSupplier, user]);
-  
+
   return (
     <Box className='container'>
       <Header />
-      <Tabs />
-      <CustomTable />
+      <Box className='content'>
+        <Tabs />
+        <CustomTable />
+      </Box>
       <Footer />
     </Box>
   );
