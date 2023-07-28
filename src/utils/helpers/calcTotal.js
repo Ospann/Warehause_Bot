@@ -10,7 +10,7 @@ const CalcTotal = (data) => {
         }
     }
 
-    return total;
+    return total.toFixed(2);
 }
 
 export default CalcTotal;
