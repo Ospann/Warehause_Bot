@@ -29,7 +29,7 @@ const OrderModal = () => {
         product_id: '',
         qty: '',
         price: '',
-        user: '',
+        user_id: user.id,
     });
 
     const resetFormData = () => {
@@ -39,7 +39,7 @@ const OrderModal = () => {
             product: '',
             qty: '',
             price: '',
-            user: user.id,
+            user_id: user.id,
         });
     };
 
