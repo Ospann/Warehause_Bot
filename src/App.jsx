@@ -12,9 +12,9 @@ const App = () => {
   const { setProducts } = useAppContext();
 
   useEffect(() => {
-    if (!user) {
-      return;
-    }
+    // if (!user) {
+    //   return;
+    // }
     const fetchData = async () => {
       const response = await fetch('https://wh.maxinum.kz/api/product');
       if (!response.ok) {
