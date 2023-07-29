@@ -14,7 +14,6 @@ import { useAppContext } from "../../utils/AppContext";
 
 const CustomTable = () => {
     const { data } = useAppContext();
-    console.log(data)
     return (
         <Box className={classes.container}>
             <Box className={classes.title}>

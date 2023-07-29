@@ -9,23 +9,23 @@ import useTelegram from './utils/hooks/useTelegram';
 
 const App = () => {
   const { user } = useTelegram();
-  const { setSupplier } = useAppContext();
+  const { setProducts } = useAppContext();
 
   useEffect(() => {
     if (!user) {
       return;
     }
     const fetchData = async () => {
-      const response = await fetch('');
+      const response = await fetch('https://wh.maxinum.kz/api/product');
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error);
       }
       const data = await response.json();
-      setSupplier(data);
+      setProducts(data);
     }
     fetchData();
-  }, [setSupplier, user]);
+  }, [setProducts, user]);
 
   return (
     <Box className='container'>

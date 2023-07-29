@@ -1,27 +1,19 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useMemo } from 'react';
 
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
     const [data, setData] = useState([]);
     const [operation, setOperation] = useState('Sale');
-    const [supplier, setSupplier] = useState([{
-        name: "Apple",
-        product: [
-            {
-                name: "Iphone",
-                order_price: 999.99,
-                purchase_price: 729.99
-            },
-            {
-                name: "Macbook",
-                order_price: 1299.99,
-                purchase_price: 929.99
-            }]
-    }]);
+    const [products, setProducts] = useState([]);
+
+    const supplierList = useMemo(() => {
+        const suppliersSet = new Set(products.map(product => product.supplier));
+        return Array.from(suppliersSet);
+    }, [products]);
 
     return (
-        <AppContext.Provider value={{ data, setData, operation, setOperation, supplier, setSupplier }}>
+        <AppContext.Provider value={{ data, setData, operation, setOperation, products, setProducts, supplierList }}>
             {children}
         </AppContext.Provider>
     );

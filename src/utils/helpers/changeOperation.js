@@ -1,9 +1,9 @@
-const changeOperation = (data, operation, supplier) => {
+const changeOperation = (data, operation, products) => {
     return data.map((item) => {
-        const selectedSupplier = supplier.find((supplier) => supplier.name === item.supplier);
-        const selectedProduct = selectedSupplier.product.find((product) => product.name === item.product);
-        item.operation = operation;
-        item.price = operation === 'Sale' ? selectedProduct.order_price : selectedProduct.purchase_price;
+        const selectedProduct = products.find((product) =>
+            product.id == item.product_id
+        );
+        item.price = operation === 'Sale' ? selectedProduct.order : selectedProduct.purchase;
 
         return item;
     });

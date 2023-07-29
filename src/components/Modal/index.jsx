@@ -20,14 +20,13 @@ import { useAppContext } from '../../utils/AppContext';
 import validation from '../../utils/helpers/validation';
 
 const OrderModal = () => {
-    const { setData, data, operation, supplier } = useAppContext();
+    const { setData, data, operation, products, supplierList } = useAppContext();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { user } = useTelegram();
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
         supplier: '',
-        product: '',
-        operation: operation,
+        product_id: '',
         qty: '',
         price: '',
         user: '',
@@ -36,8 +35,8 @@ const OrderModal = () => {
     const resetFormData = () => {
         setFormData({
             supplier: '',
+            product_id: '',
             product: '',
-            operation: operation,
             qty: '',
             price: '',
             user: user.id,
@@ -47,14 +46,13 @@ const OrderModal = () => {
     const handleChange = ({ target }) => {
         const { name, value } = target;
 
-        if (name === 'product') {
-            const selectedSupplier = supplier.find((supplier) => supplier.name === formData.supplier);
-            const selectedProduct = selectedSupplier.product.find((product) => product.name === value);
-
+        if (name === 'product_id') {
+            const selectedProduct = products.find((product) => product.id == value && product.supplier === formData.supplier);
             setFormData((prevData) => ({
                 ...prevData,
                 [name]: value,
-                price: operation === 'Sale' ? selectedProduct.order_price : selectedProduct.purchase_price,
+                product: selectedProduct.name,
+                price: operation === 'Sale' ? selectedProduct.order : selectedProduct.purchase,
             }));
         } else {
             setFormData((prevData) => ({
@@ -91,24 +89,24 @@ const OrderModal = () => {
                             onChange={handleChange}
                         >
                             <option value="">Select a supplier</option>
-                            {supplier?.map((supplier) => (
-                                <option key={supplier.name} value={supplier.name}>
-                                    {supplier.name}
+                            {supplierList?.map((supplier) => (
+                                <option key={supplier} value={supplier}>
+                                    {supplier}
                                 </option>
                             ))}
                         </Select>
                         <Select
-                            name="product"
-                            value={formData.product}
+                            name="product_id"
+                            value={formData.product_id}
                             onChange={handleChange}
                             disabled={!formData.supplier}
                         >
                             <option value="">Select a product</option>
                             {formData.supplier &&
-                                supplier
-                                    ?.find((supplier) => supplier.name === formData.supplier)
-                                    ?.product.map((product) => (
-                                        <option key={product.name} value={product.name}>
+                                products
+                                    ?.filter((product) => product.supplier === formData.supplier)
+                                    .map((product) => (
+                                        <option key={product.name} value={product.id}>
                                             {product.name}
                                         </option>
                                     ))}

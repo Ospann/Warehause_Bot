@@ -6,10 +6,10 @@ import { useAppContext } from "../../utils/AppContext";
 import changeOperation from "../../utils/helpers/changeOperation";
 
 const Tabs = () => {
-    const { operation, setOperation, data, supplier, setData } = useAppContext();
+    const { operation, setOperation, data, setData, products } = useAppContext();
     const handleTabClick = (tab) => {
         setOperation(tab);
-        const changedData = changeOperation(data, tab, supplier);
+        const changedData = changeOperation(data, tab, products);
         setData(changedData);
     };
 

@@ -17,7 +17,16 @@ const Footer = () => {
                 isClosable: true,
             });
         } else {
+            fetch("https://wh.maxinum.kz/api", {
+
+            }).then()
             setData([]);
+            toast({
+                title: 'Data uploaded',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
         }
     };
 
